@@ -1,5 +1,8 @@
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, ArrowUpRight, Sparkles } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Github, Linkedin, Mail, ArrowUpRight, Sparkles, ChevronDown } from "lucide-react";
 
 // Component Imports
 import Navbar from "./components/Navbar";
@@ -8,100 +11,233 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 
 export default function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-in-out',
+      offset: 100,
+    });
+  }, []);
+
+  // 1. Scroll Progress Logic (Top Bar)
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  // 2. Parallax Logic (Background Blobs)
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 200]);
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200 selection:bg-sky-500/30 overflow-x-hidden">
       
-      {/* 1. Background Glow Effects */}
+      {/* --- SCROLL PROGRESS BAR --- */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-500 to-purple-500 origin-left z-[100]"
+        style={{ scaleX }}
+      />
+
+      {/* --- PARALLAX BACKGROUND GLOWS --- */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-sky-500/10 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 blur-[120px] rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
+        <motion.div 
+          style={{ y: y1 }}
+          className="absolute top-[-10%] left-1/4 w-[500px] h-[500px] bg-sky-500/10 blur-[120px] rounded-full animate-pulse" 
+        />
+        <motion.div 
+          style={{ y: y2, animationDelay: '2s' }}
+          className="absolute bottom-[-10%] right-1/4 w-[600px] h-[600px] bg-purple-500/10 blur-[120px] rounded-full animate-pulse" 
+        />
       </div>
 
-      {/* 2. Floating Navigation */}
       <Navbar />
 
-      {/* 3. Hero Section */}
-      <main className="relative z-10 container mx-auto px-6 pt-44 pb-20">
-        <div className="flex flex-col items-center text-center">
-          <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-medium mb-8"
-          >
-            <Sparkles size={14} />
-            <span>Available for 2026 opportunities</span>
-          </motion.div>
+      {/* --- HERO SECTION --- */}
+      {/* --- MODERN HERO SECTION --- */}
+      <main className="relative z-10 min-h-screen flex flex-col justify-center container mx-auto px-6 lg:px-12 pt-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+          
+          {/* Left Side: Massive Lowercase Typography */}
+          <div className="lg:col-span-8">
+            <motion.div 
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              className="flex items-center gap-3 mb-6"
+            >
+              <div className="h-[1px] w-12 bg-sky-500"></div>
+              <span className="text-sky-500 font-mono text-sm tracking-tighter uppercase italic">
+                S/W Engineer & UI Architect
+              </span>
+            </motion.div>
 
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-8xl font-bold tracking-tight text-white mb-8 leading-[1.1]"
-          >
-            Building <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-500 to-purple-500">Modern</span> <br />
-            Web Experiences.
-          </motion.h1>
-
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="max-w-xl text-lg text-slate-400 mb-10"
-          >
-            I'm <span className="text-white font-medium">Harshana Senadeera</span>, a Full-stack Developer specializing in high-performance applications. 
-            Focused on clean code and beautiful aesthetics.
-          </motion.p>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-4"
-          >
-            <a href="#work" className="group px-8 py-4 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-2xl flex items-center gap-2 transition-all hover:shadow-[0_0_30px_-5px_rgba(14,165,233,0.5)]">
-              Explore Projects
-              <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </a>
-            
-            <div className="flex gap-2">
-              {[
-                { Icon: Github, link: "https://github.com/HarshanaSenadeera" },
-                { Icon: Linkedin, link: "#" },
-                { Icon: Mail, link: "mailto:your@email.com" }
-              ].map((item, i) => (
-                <a 
-                  key={i} 
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 rounded-2xl bg-slate-900 border border-white/5 hover:border-white/20 text-slate-400 hover:text-white transition-all"
-                >
-                  <item.Icon size={24} />
-                </a>
-              ))}
+            <div className="overflow-hidden">
+              <motion.h1 
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="text-6xl md:text-[7rem] font-black tracking-tight text-white leading-[0.85] lowercase"
+              >
+                digital <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-br from-slate-200 to-slate-500">
+                  craftsman
+                </span>
+              </motion.h1>
             </div>
-          </motion.div>
+
+            <div className="mt-12 max-w-2xl border-l border-white/10 pl-8" data-aos="fade-right" data-aos-delay="400">
+              <p className="text-xl text-slate-400 leading-relaxed italic lowercase">
+                "i bridge the gap between <span className="text-white font-medium">complex backend logic</span> and 
+                <span className="text-white font-medium"> pixel-perfect aesthetics</span>."
+              </p>
+            </div>
+          </div>
+
+          {/* Right Side: Bento Style Info */}
+          <div className="lg:col-span-4 space-y-6" data-aos="fade-left" data-aos-delay="600">
+            <div className="p-6 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-all duration-500">
+              <div className="flex justify-between items-start mb-4">
+                <div className="p-3 bg-sky-500/10 rounded-xl text-sky-400">
+                  <Sparkles size={20} />
+                </div>
+                <ArrowUpRight className="text-slate-600 group-hover:text-white transition-colors" />
+              </div>
+              <p className="text-sm font-medium text-slate-500 lowercase">status</p>
+              <p className="text-lg font-bold text-white lowercase tracking-tight">available for 2026 partnerships</p>
+            </div>
+
+            <div className="flex gap-4">
+              <a href="#work" className="flex-1 py-5 bg-white text-black font-black text-center rounded-3xl hover:bg-sky-400 transition-all active:scale-95 lowercase italic">
+                view work
+              </a>
+              <div className="flex gap-2">
+                {[
+                  { Icon: Github, link: "https://github.com/HarshanaSenadeera" },
+                  { Icon: Linkedin, link: "#" }
+                ].map((social, i) => (
+                  <a key={i} href={social.link} className="p-5 bg-white/5 border border-white/10 rounded-3xl hover:border-white/30 text-white transition-all">
+                    <social.Icon size={20}/>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* --- INFINITE TICKER --- */}
+<div className="mt-20 w-full overflow-hidden relative">
+  {/* Gradient Fades for a premium look */}
+  <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#030712] to-transparent z-10 pointer-events-none" />
+  <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#030712] to-transparent z-10 pointer-events-none" />
+
+  <motion.div 
+    className="flex whitespace-nowrap gap-10"
+    animate={{ x: [0, -1000] }} // Adjust -1000 based on total width of tags
+    transition={{ 
+      duration: 20, 
+      repeat: Infinity, 
+      ease: "linear" 
+    }}
+  >
+    {/* First set of tags */}
+    {[...Array(2)].map((_, i) => (
+      <div key={i} className="flex gap-10 items-center">
+        {["React", "Node.js", "TypeScript", "Three.js", "PostgreSQL", "Tailwind", "Next.js", "Framer Motion"].map((tech) => (
+          <span 
+            key={tech} 
+            className="px-6 py-2 border border-white/5 bg-white/[0.02] rounded-full text-[10px] font-mono tracking-[0.3em] uppercase text-slate-500 hover:text-sky-400 hover:border-sky-500/30 transition-colors"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+    ))}
+  </motion.div>
+</div>
       </main>
 
-      {/* 4. Page Sections */}
-      <About />
-      <Projects />
-      <Contact />
+      {/* --- PAGE SECTIONS --- */}
+      <div data-aos="fade-up"><About /></div>
+      <div data-aos="fade-up"><Projects /></div>
+      <div data-aos="fade-up"><Contact /></div>
 
-      {/* 5. Footer */}
-      <footer className="relative z-10 border-t border-white/5 py-12 mt-20">
-        <div className="container mx-auto px-6 flex flex-col items-center">
-          <div className="text-white font-bold tracking-tighter text-xl mb-4">
-            HARSHANA<span className="text-sky-500">.</span>
-          </div>
-          <p className="text-slate-500 text-sm mb-2 text-center">
-            Designed & Developed by <span className="text-slate-300">Harshana Senadeera</span>
-          </p>
-          <p className="text-slate-600 text-[10px] uppercase tracking-[0.2em]">
-            © 2026 All Rights Reserved
-          </p>
+      {/* --- FOOTER --- */}
+      <footer className="relative z-10 border-t border-white/5 bg-slate-950/50 backdrop-blur-lg pt-20 pb-10">
+  <div className="container mx-auto px-6">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+      
+      {/* Brand Column */}
+      <div className="md:col-span-2">
+        <div className="text-white font-black tracking-tighter text-3xl mb-6 uppercase italic">
+          HARSHANA<span className="text-sky-500">.</span>
         </div>
-      </footer>
+        <p className="text-slate-400 max-w-sm leading-relaxed">
+          Crafting high-performance digital experiences with a focus on 
+          clean code and user-centric design. Let's build the future together.
+        </p>
+      </div>
+
+      {/* Navigation Column */}
+      <div>
+        <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Navigation</h4>
+        <ul className="space-y-4 text-sm text-slate-500">
+          {['About', 'Work', 'Experience', 'Contact'].map((item) => (
+            <li key={item}>
+              <a href={`#${item.toLowerCase()}`} className="hover:text-sky-400 transition-colors">
+                {item}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Status Column */}
+      <div>
+        <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Status</h4>
+        <div className="flex items-center gap-3">
+          <span className="relative flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+          </span>
+          <span className="text-sm text-slate-300 font-medium">Available for new projects</span>
+        </div>
+        <div className="mt-6">
+          <p className="text-xs text-slate-500 uppercase tracking-tighter">Current Location</p>
+          <p className="text-sm text-slate-300">Galle, Sri Lanka</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom Bar */}
+    <div className="pt-8 border-t border-white/5 flex flex-col md:row-reverse md:flex-row justify-between items-center gap-6">
+      <div className="flex gap-6">
+        <a href="#" className="text-slate-500 hover:text-white transition-colors"><Github size={20}/></a>
+        <a href="#" className="text-slate-500 hover:text-white transition-colors"><Linkedin size={20}/></a>
+        <a href="#" className="text-slate-500 hover:text-white transition-colors"><Mail size={20}/></a>
+      </div>
+      
+      <div className="text-center md:text-left">
+        <p className="text-slate-500 text-xs tracking-wide">
+          © 2026 <span className="text-white font-medium">Harshana Senadeera</span>. 
+          Built with <span className="text-sky-500">React</span> & <span className="text-purple-500">Tailwind</span>
+        </p>
+      </div>
+
+      {/* Scroll to top button */}
+      <button 
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-sky-500 transition-all"
+      >
+        Back to top
+        <div className="p-2 rounded-full bg-white/5 group-hover:bg-sky-500/20 transition-all">
+          <ArrowUpRight size={14} className="-rotate-45" />
+        </div>
+      </button>
+    </div>
+  </div>
+</footer>
     </div>
   );
 }

@@ -38,12 +38,41 @@ const fadeInUp = {
 export default function Projects() {
   return (
     <section id="work" className="relative z-10 container mx-auto px-6 py-20">
-      <motion.div {...fadeInUp} className="mb-16">
-        <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tighter italic uppercase">
-          Featured <span className="text-sky-500">Work</span>
-        </h2>
-        <div className="h-1 w-20 bg-sky-500 rounded-full" />
-      </motion.div>
+      <motion.div {...fadeInUp} className="mb-20 relative flex items-center group">
+  {/* Massive Ghost Text Shadow */}
+  <span className="absolute left-0 text-[6rem] md:text-[11rem] font-black text-white/[0.02] select-none pointer-events-none uppercase tracking-tighter whitespace-nowrap">
+    Featured
+  </span>
+
+  <div className="relative z-10">
+    {/* Section Index Tag */}
+    <motion.div 
+      initial={{ x: -10, opacity: 0 }}
+      whileInView={{ x: 0, opacity: 1 }}
+      className="flex items-center gap-3 mb-2"
+    >
+      <span className="text-sky-500 font-mono text-[10px] tracking-[0.4em] uppercase italic">
+        02 / selected work
+      </span>
+      <div className="h-[1px] w-12 bg-sky-500/30"></div>
+    </motion.div>
+
+    {/* Main Title - Single Line */}
+    <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-8">
+      <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white lowercase italic flex items-center gap-4">
+        featured 
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-400 to-slate-600">
+          work.
+        </span>
+      </h2>
+
+      {/* Description Text - Shifted for Balance */}
+      <p className="text-slate-500 text-sm max-w-[280px] leading-relaxed lowercase mb-2 border-l border-white/10 pl-4">
+        transforming complex problems into elegant digital solutions through clean code.
+      </p>
+    </div>
+  </div>
+</motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {projects.map((project, index) => (

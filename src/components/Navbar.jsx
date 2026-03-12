@@ -9,7 +9,7 @@ export default function Navbar() {
           <div className="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center italic shadow-[0_0_15px_rgba(14,165,233,0.4)]">
             H
           </div>
-          <span>Dev Portfolio</span>
+          <span>Harshana Senadeera</span>
         </div>
 
         {/* Links Section */}

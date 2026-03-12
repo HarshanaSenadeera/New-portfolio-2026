@@ -60,12 +60,37 @@ export default function About() {
   return (
     <section id="about" className="relative z-10 container mx-auto px-6 py-24">
       {/* Section Header */}
-      <motion.div {...fadeInUp} className="mb-16">
-        <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tighter italic uppercase">
-          About <span className="text-sky-500">Me</span>
-        </h2>
-        <div className="h-1 w-20 bg-sky-500 rounded-full" />
-      </motion.div>
+      <motion.div {...fadeInUp} className="mb-20 relative flex items-center">
+  {/* The Architectural "Shadow" Layer */}
+  <span className="absolute left-0 text-[6rem] md:text-[11rem] font-black text-white/[0.03] select-none pointer-events-none uppercase tracking-tighter whitespace-nowrap">
+    About Me
+  </span>
+
+  {/* The Main Content */}
+  <div className="relative z-10 flex flex-col">
+    <motion.div 
+      initial={{ x: -10, opacity: 0 }}
+      whileInView={{ x: 0, opacity: 1 }}
+      className="flex items-center gap-3 mb-2"
+    >
+      <span className="text-sky-500 font-mono text-[10px] tracking-[0.4em] uppercase italic">
+        01 / profile
+      </span>
+      <div className="h-[1px] w-12 bg-sky-500/30"></div>
+    </motion.div>
+
+    <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white lowercase italic flex items-center gap-4">
+      about 
+      <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-400 to-slate-600">
+        me.
+      </span>
+      {/* Small accent line that appears after the text */}
+      <div className="hidden md:block h-[2px] w-24 bg-gradient-to-r from-sky-500/50 to-transparent rounded-full ml-4" />
+    </h2>
+  </div>
+</motion.div>
+
+
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
