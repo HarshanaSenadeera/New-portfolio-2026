@@ -95,35 +95,58 @@ export default function App() {
             </div>
           </div>
 
-          {/* Right Side: Bento Style Info */}
-          <div className="lg:col-span-4 space-y-6" data-aos="fade-left" data-aos-delay="600">
-            <div className="p-6 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-all duration-500">
-              <div className="flex justify-between items-start mb-4">
-                <div className="p-3 bg-sky-500/10 rounded-xl text-sky-400">
-                  <Sparkles size={20} />
-                </div>
-                <ArrowUpRight className="text-slate-600 group-hover:text-white transition-colors" />
-              </div>
-              <p className="text-sm font-medium text-slate-500 lowercase">status</p>
-              <p className="text-lg font-bold text-white lowercase tracking-tight">available for 2026 partnerships</p>
-            </div>
-
-            <div className="flex gap-4">
-              <a href="#work" className="flex-1 py-5 bg-white text-black font-black text-center rounded-3xl hover:bg-sky-400 transition-all active:scale-95 lowercase italic">
-                view work
-              </a>
-              <div className="flex gap-2">
-                {[
-                  { Icon: Github, link: "https://github.com/HarshanaSenadeera" },
-                  { Icon: Linkedin, link: "#" }
-                ].map((social, i) => (
-                  <a key={i} href={social.link} className="p-5 bg-white/5 border border-white/10 rounded-3xl hover:border-white/30 text-white transition-all">
-                    <social.Icon size={20}/>
-                  </a>
-                ))}
-              </div>
-            </div>
+          {/* Right Side: Profile & Bento Info */}
+<div className="lg:col-span-4 space-y-6" data-aos="fade-left" data-aos-delay="600">
+  
+  {/* The Profile Image Card */}
+  <div className="relative group">
+    {/* Decorative Ring Animation */}
+    <div className="absolute -inset-1 bg-gradient-to-r from-sky-500 to-purple-600 rounded-[3rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+    
+    <div className="relative aspect-[4/5] overflow-hidden rounded-[3rem] border border-white/10 bg-slate-900">
+      {/* Replace 'your-image-url.jpg' with your actual image path */}
+      <img 
+        src="src\assets\WhatsApp Image 2026-03-12 at 15.19.24.jpeg" 
+        alt="Harshana Senadeera"
+        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100"
+      />
+      
+      {/* Overlay Info Layer */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
+      
+      <div className="absolute bottom-6 left-6 right-6 p-4 backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl">
+        <div className="flex justify-between items-center">
+          <div>
+            <p className="text-[10px] font-mono text-sky-400 uppercase tracking-widest">location</p>
+            <p className="text-sm font-bold text-white">Galle, Sri Lanka</p>
           </div>
+          <div className="h-8 w-8 rounded-full border border-white/20 flex items-center justify-center">
+             <div className="h-2 w-2 bg-emerald-500 rounded-full animate-ping" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Quick Action Buttons */}
+  <div className="flex flex-col gap-4">
+    <div className="flex gap-4">
+      <a href="#work" className="flex-1 py-5 bg-white text-black font-black text-center rounded-3xl hover:bg-sky-400 transition-all active:scale-95 lowercase italic">
+        view work
+      </a>
+      <div className="flex gap-2">
+        {[
+          { Icon: Github, link: "https://github.com/HarshanaSenadeera" },
+          { Icon: Linkedin, link: "#" }
+        ].map((social, i) => (
+          <a key={i} href={social.link} className="p-5 bg-white/5 border border-white/10 rounded-3xl hover:border-white/30 text-white transition-all group">
+            <social.Icon size={20} className="group-hover:text-sky-400 transition-colors"/>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
         </div>
 
         {/* --- INFINITE TICKER --- */}
