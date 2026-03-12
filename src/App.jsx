@@ -118,7 +118,7 @@ export default function App() {
         <div className="flex justify-between items-center">
           <div>
             <p className="text-[10px] font-mono text-sky-400 uppercase tracking-widest">location</p>
-            <p className="text-sm font-bold text-white">Galle, Lsadhc Sri Lanka</p>
+            <p className="text-sm font-bold text-white">Galle, Sri Lanka</p>
           </div>
           <div className="h-8 w-8 rounded-full border border-white/20 flex items-center justify-center">
              <div className="h-2 w-2 bg-emerald-500 rounded-full animate-ping" />
