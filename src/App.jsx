@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import Projects from "./components/Projects";
 import { Github, Linkedin, Mail, ArrowUpRight, Code2, Sparkles, ExternalLink } from "lucide-react";
 import Navbar from "./components/Navbar";
+import About from "./components/About";
+import Contact from "./components/Contact";
 
 export default function App() {
   const fadeInUp = {
@@ -81,8 +83,14 @@ export default function App() {
         </div>
       </main>
 
+      {/* 4. About Section */}
+      <About />
+
       {/* 4. Project Grid Section */}
       <Projects />
+
+      {/* 5. Contact Section */}  
+      <Contact />
 
       {/* 5. Footer */}
       <footer className="relative z-10 border-t border-white/5 py-10 text-center text-slate-600 text-sm">
