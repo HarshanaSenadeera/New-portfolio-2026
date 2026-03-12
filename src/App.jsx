@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
+import pfimage from "./assets/WhatsApp Image 2026-03-12 at 15.19.24.jpeg";
 
 export default function App() {
   useEffect(() => {
@@ -106,7 +107,7 @@ export default function App() {
     <div className="relative aspect-[4/5] overflow-hidden rounded-[3rem] border border-white/10 bg-slate-900">
       {/* Replace 'your-image-url.jpg' with your actual image path */}
       <img 
-        src="src\assets\WhatsApp Image 2026-03-12 at 15.19.24.jpeg" 
+        src= {pfimage}
         alt="Harshana Senadeera"
         className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100"
       />
