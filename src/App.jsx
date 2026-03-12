@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Projects from "./components/Projects";
 import { Github, Linkedin, Mail, ArrowUpRight, Code2, Sparkles, ExternalLink } from "lucide-react";
 
 export default function App() {
@@ -94,38 +95,7 @@ export default function App() {
       </main>
 
       {/* 4. Project Grid Section */}
-      <section id="work" className="relative z-10 container mx-auto px-6 py-20">
-        <motion.div {...fadeInUp} className="mb-12">
-          <h2 className="text-3xl font-bold text-white mb-2">Featured Work</h2>
-          <p className="text-slate-400">A selection of my recent technical projects.</p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              {...fadeInUp}
-              transition={{ delay: index * 0.1 }}
-              className={`group relative p-8 rounded-3xl bg-gradient-to-br ${project.color} to-slate-900/50 border border-white/5 hover:border-sky-500/50 transition-all cursor-pointer`}
-            >
-              <div className="flex justify-between items-start mb-12">
-                <div className="p-3 bg-slate-900 rounded-2xl border border-white/5">
-                  <Code2 className="text-sky-400" size={24} />
-                </div>
-                <ExternalLink size={20} className="text-slate-600 group-hover:text-white transition-colors" />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">{project.title}</h3>
-              <div className="flex gap-2 flex-wrap">
-                {project.tech.map((t) => (
-                  <span key={t} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-white/5 rounded-md text-slate-400">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      <Projects />
 
       {/* 5. Footer */}
       <footer className="relative z-10 border-t border-white/5 py-10 text-center text-slate-600 text-sm">
