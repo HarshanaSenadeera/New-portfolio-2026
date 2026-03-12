@@ -32,7 +32,7 @@ export default function Contact() {
                 <div className="p-3 bg-white/5 rounded-2xl group-hover:bg-sky-500/20 transition-colors">
                   <Mail size={20} />
                 </div>
-                <span className="font-medium">hello@yourdomain.com</span>
+                <span className="font-medium">harshanasenadeera64@gmail.com</span>
               </a>
               <div className="flex gap-4 pt-4">
                 {[Github, Linkedin].map((Icon, i) => (
@@ -66,13 +66,6 @@ export default function Contact() {
             </form>
           </motion.div>
         </div>
-      </div>
-
-      {/* Final Footer Label */}
-      <div className="mt-20 text-center">
-        <p className="text-slate-600 text-sm flex items-center justify-center gap-2 font-medium">
-          Made with <span className="text-red-500/60">❤</span> in Colombo
-        </p>
       </div>
     </section>
   );

@@ -38,9 +38,11 @@ const fadeInUp = {
 export default function Projects() {
   return (
     <section id="work" className="relative z-10 container mx-auto px-6 py-20">
-      <motion.div {...fadeInUp} className="mb-12">
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 italic uppercase tracking-tighter">Featured Work</h2>
-        <p className="text-slate-400 max-w-md">Transforming complex problems into elegant digital solutions through clean code.</p>
+      <motion.div {...fadeInUp} className="mb-16">
+        <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tighter italic uppercase">
+          Featured <span className="text-sky-500">Work</span>
+        </h2>
+        <div className="h-1 w-20 bg-sky-500 rounded-full" />
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

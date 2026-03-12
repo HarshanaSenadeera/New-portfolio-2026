@@ -23,7 +23,7 @@ export default function Navbar() {
         </div>
 
         {/* Action Button */}
-        <button className="bg-white text-black px-4 py-1.5 rounded-xl text-xs font-bold hover:bg-sky-400 transition-all active:scale-95 shadow-lg shadow-white/5">
+        <button onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })} className="bg-white text-black px-4 py-1.5 rounded-xl text-xs font-bold hover:bg-sky-400 transition-all active:scale-95 shadow-lg shadow-white/5">
           Contact
         </button>
       </div>
